@@ -1,0 +1,46 @@
+.target {
+    background-color: greenyellow;
+    border: 2px solid red;
+}
+.get-back {
+    margin-bottom: 50px;
+    margin-top: 0;
+}
+.matched {
+    background-color: greenyellow;
+}
+table  {
+    text-align: center;
+    font-weight: bold;
+}
+.divisor {
+    border-top: 1px solid black;
+}
+thead, .labels {
+    background-color: lightseagreen;
+    font-weight: bolder;
+}
+thead td {
+    min-width: 50px;
+    min-height: 50px;
+}
+input {
+    width: 30px;
+}
+button {
+    margin-top: 20px;
+}
+input {
+    width: 50px!important;
+    display: inline-block!important;
+    margin: 2px;
+}
+.sign-option{
+    margin: 10px;
+    padding: 5px;
+}
+.inalienability {
+    margin-right: 30px;
+    display: none;
+}
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+</head>
+<body>
+
+<div id="container">
+
+</div>
+<style scoped>
+    .target {
+        background-color: red;
+    }
+
+    .matched {
+        background-color: brown;
+    }
+    table  {
+        text-align: center;
+    }
+    .divisor {
+        border-top: 1px solid black;
+    }
+    thead, .labels {
+        background-color: darkcyan;
+    }
+    input {
+        width: 30px;
+    }
+    button {
+        margin-top: 20px;
+    }
+    input {
+        width: 50px!important;
+        display: inline-block!important;
+        margin: 2px;
+    }
+    .sign-option{
+        margin: 10px;
+        padding: 5px;
+    }
+    .inalienability {
+        margin-right: 30px;
+    }
+
+</style>
+</body>
+<script src="js/vendor/jquery-2.2.2.min.js"></script>
+<script src="js/app/Optimizer.js"></script>
+<script src="js/app/Fraction.js"></script>
+<script src="js/app/TableProcessor.js"></script>
+<script src="js/app/Visualisator.js"></script>
+<script src="js/app/SimplexMethod.js"></script>
+<script src="js/app/Inputer.js"></script>
+<script src="js/app/Transformator.js"></script>
+<script src="js/app/Kernel.js"></script>
+
+<script>
+    M = 909091;
+    var kernel = new Kernel();
+    //kernel.testRun();
+    kernel.runApplication();
+</script>
+</html>
