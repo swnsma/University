@@ -1,0 +1,6 @@
+node_modules
+public/images/baseLine/*
+public/images/currentLine/*
+public/images/rejected/*
+.idea
+config/config.json

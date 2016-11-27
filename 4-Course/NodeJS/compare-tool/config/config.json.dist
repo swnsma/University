@@ -1,0 +1,7 @@
+{
+  "port": 3000,
+  "base": "baseLine",
+  "current": "currentLine",
+  "reject": "rejected",
+  "folder": "your destination here"
+}

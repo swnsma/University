@@ -1,0 +1,128 @@
+<!--ko if: maintenance -->
+<div id="loading">
+    <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+    </div>
+</div>
+<!--/ko -->
+<div class="component-title" data-bind="text:component"></div>
+<div data-bind="hotkeydown: [{ 'a': prev}, {'d': next}, {'left': prev}, {'right': next}, {'home': first}, {'end': last}]" class="row btns-panel" >
+    <button type="button" data-bind="css:{'btn-secondary': !prevAllow(), 'btn-danger': prevAllow()}, click:first" class="btn"><<</button>
+    <button type="button" data-bind="css:{'btn-secondary': !prevAllow(), 'btn-info': prevAllow()}, click:prev" class="btn"><</button>
+    <input class="cursor-switcher" data-bind="value:cursor"/>
+    <button type="button" data-bind="css:{'btn-secondary': !nextAllow(), 'btn-info': nextAllow()},click:next" class="btn">></button>
+    <button type="button" data-bind="css:{'btn-secondary': !nextAllow(), 'btn-danger': nextAllow()}, click:last" class="btn">>></button>
+    <div class="settings-button" data-bind="click:comparator.openPopUp, hotkeydown:{'`': comparator.openPopUp}">
+        <img src="images/sett.png">
+    </div>
+    <div class="back-button" data-bind="click: backButton, hotkeydown:{'esc': backButton}">
+        <img src="images/back.png">
+    </div>
+</div>
+<div class="row btns-panel">
+    <button class="btn btn-large btn-success" data-bind="click: compareImages, hotkeydown: {'space': compareImages}">
+        <!--ko if:compareMode-->
+        Hide
+        <!--/ko -->
+        <!--ko ifnot:compareMode-->
+        Compare
+        <!--/ko -->
+    </button>
+    <!--ko if: compareMode -->
+    <div class="row">
+        <p class="analysis-text" data-bind="html:comparator.compareAnalysisText"></p>
+    </div>
+    <!--/ko -->
+</div>
+<header>
+    <div class="page-header">
+        <h1 data-bind="text: title"></h1>
+        <div class="accept-reject-btns">
+            <img data-bind="click:acceptImage" src="images/accept.png"/>
+            <img data-bind="click: rejectImage" src="images/reject.png"/>
+        </div>
+    </div>
+</header>
+<section role="main">
+    <div class="row images">
+        <div class="span6">
+            <h2>Base image</h2>
+            <img data-bind="attr:{src: baseSrc}"/>
+        </div>
+        <div class="span6">
+            <!--ko ifnot: compareMode -->
+            <h2>Current image</h2>
+            <img data-bind="attr:{src: currentSrc}"/>
+            <!--/ko -->
+            <!--ko if: compareMode -->
+            <h2>Analysis Results</h2>
+            <img data-bind="attr:{src: comparator.compareResultUrl}"/>
+            <!--/ko -->
+        </div>
+    </div>
+</section>
+<!--ko if: comparator.popUp -->
+<section class="panel-settings">
+    <div class="form-inline">
+        <div class="btn-group">
+            <label class="span2">Ignore options:</label>
+            <div>
+                <button class="btn" data-bind="css:{'active': comparator.ignore()=='nothing'},
+                     click:function(data, event) {comparator.changeIgnore('nothing', data, event);}" id="raw">Ignore nothing</button>
+                <button class="btn" data-bind="css:{'active': comparator.ignore()=='color'},
+                     click:function(data, event) {comparator.changeIgnore('color', data, event);}" id="colors">Ignore colors</button>
+                <button class="btn" data-bind="css:{'active': comparator.ignore()=='antialising'},
+                     click:function(data, event) {comparator.changeIgnore('antialising', data, event);}" id="antialising">Ignore antialiasing</button>
+            </div>
+        </div>
+        <div class="btn-group color-options">
+            <label class="span2">Error pixels color:</label>
+            <div >
+                <button class="btn" data-bind="css:{'active': comparator.red()=='255'&&comparator.green()=='0'&&comparator.blue()=='255'},
+                     click:function(data,event){comparator.applyColor(255, 0, 255, data, event);}">Pink</button>
+                <button class="btn" data-bind="css:{'active': comparator.red()=='255'&&comparator.green()=='255'&&comparator.blue()=='0'},
+                     click:function(data,event){comparator.applyColor(255, 255, 0, data, event);}">Yellow</button>
+                <button class="btn" data-bind="click: comparator.advanceColor">Another</button>
+                <div class="settings">
+                    <span class="span2"></span>
+                    <!-- ko if: comparator.advanceColorPanel-->
+                    <hr/>
+                    <label>Red:<input type="number" min="0" max="255" data-bind="value: comparator.red" id="red"/></label>
+                    <label>Green:<input type="number" min="0" max="255" data-bind="value: comparator.green" id="green"/></label>
+                    <label>Blue:<input type="number" min="0" max="255" data-bind="value: comparator.blue" id="blue"/></label>
+                    <button class="btn btn-mini" data-bind="click:function(data,event){comparator.setColor(data, event);}">Apply colors</button>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+        <div class="btn-group">
+            <label class="span2">Error type options:</label>
+            <div>
+                <button class="btn" data-bind="css:{'active': comparator.errorType()=='flat'},
+                    click: function(data, event) {comparator.changeErrorType('flat', data, event);}">Flat</button>
+                <button class="btn" data-bind="css:{'active': comparator.errorType()=='movement'},
+                    click: function(data, event) {comparator.changeErrorType('movement', data, event);}">Movement</button>
+                <button class="btn" data-bind="css:{'active': comparator.errorType()=='flatDifferenceIntensity'},
+                    click: function(data, event) {comparator.changeErrorType('flatDifferenceIntensity', data, event);}">Flat with diff intensity</button>
+                <button class="btn" data-bind="css:{'active': comparator.errorType()=='movementDifferenceIntensity'},
+                    click: function(data, event) {comparator.changeErrorType('movementDifferenceIntensity', data, event);}">Movement with diff intensity</button>
+            </div>
+        </div>
+        <div class="btn-group">
+            <label for='transparency' class="span2">Transparency:</label>
+            <div>
+                <input id='transparency' data-bind="value:comparator.transparancyChange" min="0" max="1" step="0.1" type="number"/>
+            </div>
+        </div>
+        <div class="btn-group clear">
+            <label for="defaultCompare">Compare pictures, when open the page: <input type="checkbox" class="checkbox" id="defaultCompare" data-bind="checked: compareByDefault"/></label>
+        </div>
+        <div class="btn-group">
+            <button data-bind="click: processTheSameDelete" class="btn btn-danger">Process the same pictures</button>
+        </div>
+    </div>
+</section>
+<!--/ko -->

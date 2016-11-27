@@ -1,0 +1,12 @@
+<h1>Add a Video</h1>
+<form>
+    <div class="form-group">
+        <label>Title
+        <input class="form-control" ng-model="video.title"/></label>
+    </div>
+    <div class="form-group">
+        <label>Description
+        <textarea class="form-control" ng-model="video.description"></textarea></label>
+    </div>
+    <input type="button" class="btn btn-primary" ng-click="save()" value="Save"/>
+</form>

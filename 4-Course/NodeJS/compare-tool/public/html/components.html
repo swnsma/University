@@ -1,0 +1,43 @@
+<section role="main">
+    <h1>Please, select the project</h1>
+    <ul class="list-group">
+        <!--ko foreach: projects-->
+        <li data-bind="css:{'list-group-item-success': selected}" class="list-group-item unselectable">
+            <span class="record" data-bind="text: name, click: select"></span>
+            <span class="delete" data-bind="click: $parent.deleteProject">X</span>
+            <!--ko if: selected -->
+            <ul class="list-group">
+                <!--ko foreach: components-->
+                    <li class="list-group-item" >
+                        <span class="record" data-bind="text: name, click: selectComponent"></span>
+                        <span class="delete" data-bind="click: $parent.deleteComponent">X</span>
+                    </li>
+                <!--/ko-->
+                <li class="list-group-item unselectable">
+                    <!--ko ifnot: addNewComponent -->
+                    <button class="btn" data-bind="click: newAddComponent">Add new component</button>
+                    <!--/ko-->
+                    <!--ko if: addNewComponent -->
+                    <input class="name" type="text" data-bind="value:newName, css:{'error': validationStatus}"/>
+                    <button class="btn btn-info" data-bind="click:submit">Submit</button>
+                    <button class="btn-danger btn" data-bind="click:reject">Cancel</button>
+                    <!--/ko-->
+                </li>
+            </ul>
+            <!--/ko-->
+        </li>
+        <!--/ko-->
+
+        <li class="list-group-item">
+            <!--ko ifnot: addNew -->
+            <button class="btn add-new" data-bind="click: newAdd">Add new project</button>
+            <!--/ko-->
+            <!--ko if: addNew -->
+                <input class="name" type="text" data-bind="value:newName, css:{'error': validationStatus}"/>
+                <button class="btn btn-info" data-bind="click:submit">Submit</button>
+                <button class="btn-danger btn" data-bind="click:reject">Cancel</button>
+            <!--/ko-->
+        </li>
+
+    </ul>
+</section>
