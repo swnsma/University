@@ -1,0 +1,15 @@
+[Mon Dec 05 22:41:57.944171 2016] [:error] [pid 1457] [client 127.0.0.1:43278] PHP Notice:  Undefined variable: selected in /home/swnsma/projects/tests/group.php on line 65, referer: http://tests.local/index.php
+[Mon Dec 05 22:41:57.944251 2016] [:error] [pid 1457] [client 127.0.0.1:43278] PHP Stack trace:, referer: http://tests.local/index.php
+[Mon Dec 05 22:41:57.944269 2016] [:error] [pid 1457] [client 127.0.0.1:43278] PHP   1. {main}() /home/swnsma/projects/tests/group.php:0, referer: http://tests.local/index.php
+[Mon Dec 05 22:41:57.944284 2016] [:error] [pid 1457] [client 127.0.0.1:43278] PHP Warning:  Invalid argument supplied for foreach() in /home/swnsma/projects/tests/group.php on line 65, referer: http://tests.local/index.php
+[Mon Dec 05 22:41:57.944293 2016] [:error] [pid 1457] [client 127.0.0.1:43278] PHP Stack trace:, referer: http://tests.local/index.php
+[Mon Dec 05 22:41:57.944303 2016] [:error] [pid 1457] [client 127.0.0.1:43278] PHP   1. {main}() /home/swnsma/projects/tests/group.php:0, referer: http://tests.local/index.php
+[Wed Dec 07 23:15:09.690738 2016] [:error] [pid 1506] [client 127.0.0.1:53559] PHP Notice:  Undefined variable: selected in /home/swnsma/projects/tests/group.php on line 65, referer: http://tests.local/index.php
+[Wed Dec 07 23:15:09.703551 2016] [:error] [pid 1506] [client 127.0.0.1:53559] PHP Stack trace:, referer: http://tests.local/index.php
+[Wed Dec 07 23:15:09.703584 2016] [:error] [pid 1506] [client 127.0.0.1:53559] PHP   1. {main}() /home/swnsma/projects/tests/group.php:0, referer: http://tests.local/index.php
+[Wed Dec 07 23:15:09.703603 2016] [:error] [pid 1506] [client 127.0.0.1:53559] PHP Warning:  Invalid argument supplied for foreach() in /home/swnsma/projects/tests/group.php on line 65, referer: http://tests.local/index.php
+[Wed Dec 07 23:15:09.703609 2016] [:error] [pid 1506] [client 127.0.0.1:53559] PHP Stack trace:, referer: http://tests.local/index.php
+[Wed Dec 07 23:15:09.703616 2016] [:error] [pid 1506] [client 127.0.0.1:53559] PHP   1. {main}() /home/swnsma/projects/tests/group.php:0, referer: http://tests.local/index.php
+[Wed Dec 07 23:20:19.217365 2016] [:error] [pid 12251] [client 127.0.0.1:53708] PHP Notice:  Undefined variable: myrow in /home/swnsma/projects/tests/edit.php on line 244, referer: http://tests.local/index.php?
+[Wed Dec 07 23:20:19.217417 2016] [:error] [pid 12251] [client 127.0.0.1:53708] PHP Stack trace:, referer: http://tests.local/index.php?
+[Wed Dec 07 23:20:19.217429 2016] [:error] [pid 12251] [client 127.0.0.1:53708] PHP   1. {main}() /home/swnsma/projects/tests/edit.php:0, referer: http://tests.local/index.php?
