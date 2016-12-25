@@ -122,7 +122,7 @@ function Gomori($table, $function, $listOfInt) {
         var line = [], element, a;
         for (var i =0 ;i< table[index].length -1 ; i++) {
             if (this._listOfInt.indexOf(i) != -1) {
-                if (table[index][table[index].length - 1].lt(table[index][i])) {
+                if (table[index][table[index].length - 1].lt(table[index][i].getResidue())) {
                     element = table[index][table[index].length - 1].getResidue();
                     a = new Fraction(1, 1);
                     element.div(a.min(table[index][table[index].length - 1].getResidue()));
