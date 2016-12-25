@@ -65,6 +65,8 @@ Fraction.prototype.add = function($fraction) {
 
     this._dividend += fDividend;
     this._optimizer.optimizeFraction(this);
+
+    return this;
 };
 Fraction.prototype.min = function ($fraction) {
     var fDividend, fDivisor;
@@ -82,6 +84,8 @@ Fraction.prototype.min = function ($fraction) {
 
     this._dividend -= fDividend;
     this._optimizer.optimizeFraction(this);
+
+    return this;
 };
 Fraction.prototype.div = function($fraction) {
     var fDividend, fDivisor;
@@ -102,6 +106,8 @@ Fraction.prototype.div = function($fraction) {
     this._divisor *= fDividend;
 
     this._optimizer.optimizeFraction(this);
+
+    return this;
 };
 Fraction.prototype.mult = function($fraction) {
     var fDividend, fDivisor;
@@ -117,9 +123,19 @@ Fraction.prototype.mult = function($fraction) {
     this._divisor *= fDivisor;
 
     this._optimizer.optimizeFraction(this);
+
+    return this;
 };
 Fraction.prototype.getDividend = function() {
     return this._dividend;
+};
+
+Fraction.prototype.getInt = function() {
+    return new Fraction(this._dividend - this.getResidue(),  this._divisor);
+};
+
+Fraction.prototype.getResidue = function() {
+    return new Fraction(this._dividend % this._divisor, this._divisor);
 };
 Fraction.prototype.getDivisor = function() {
     return this._divisor;

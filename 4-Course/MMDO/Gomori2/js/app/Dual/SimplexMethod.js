@@ -75,6 +75,7 @@ function DualSimplexMethod($limitMatrix, $function) {
 
         var obj = {
             table: visualizator.prepareTable(table, basis, minMax),
+            tableData: table,
             i: iteration,
             minMax: minMax
         };

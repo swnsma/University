@@ -1,4 +1,4 @@
-function Transformator($table, $function, $conditions, $inalienability, $direction) {
+function DualTransformator($table, $function, $conditions, $inalienability, $direction) {
     this._table = $table;
     this._before = $function.length;
     this._conditions = $conditions;

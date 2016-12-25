@@ -49,17 +49,17 @@ function Kernel() {
         inp.generateMetaDataInput($cont, getBack, function(variables, limits, strategy){
 
             if (strategy == 1) {
-            inp.generateInputTable($('#container'), variables, limits, function(lim, fun, signs, inalienability, direction) {
+            inp.generateInputTable($('#container'), variables, limits, function(lim, fun, signs, inalienability, direction, ints) {
                 var trans = new Transformator(lim, fun, signs, inalienability, direction);
                 var result = trans.transform();
                 for(var r in result) {
                     if (result[r]) {
-                        self.withTransformation(lim, fun, trans, result);
+                        self.withTransformation(lim, fun, trans, result, ints);
                         return;
                     }
                 }
 
-                self.withoutTransformation(lim, fun);
+                self.withoutTransformation(lim, fun, ints);
             });
             }
 
@@ -71,31 +71,16 @@ function Kernel() {
         });
     };
 
-    this.withTransformation = function(lim, func, transform, result) {
-        var Simplex = new SimplexMethod(transform.getTable(), transform.getFunction());
+    this.withTransformation = function(lim, func, transform, result, ints) {
+        var gomori = new Gomori(transform.getTable(), transform.getFunction(), ints);
         var $cont = self.getOutputContainer();
         $cont.appendTo($('#container'));
-        var inf;
-        if (result.showstopper) {
-            inf = $('<div>');
-            str = Simplex.displayMessage({errCode: 4});
-            inf.html(str);
-            inf.appendTo($cont);
-            return;
-        }
-        var extractedData = Simplex.run();
 
-        for (var i = 0; i < extractedData.length - 1; i++) {
-            extractedData[i].table.appendTo($cont);
-            inf = $('<div>');
-            var str = 'Ітерація: ' + extractedData[i].i + '<br/>';
-            str += Simplex.displayMessage(extractedData[i].minMax) + '<br/>';
-            inf.html(str);
-            inf.appendTo($cont);
-        }
-        var minMax = extractedData[i].minMax;
-        if (minMax.errCode != 1) {
-            var value = minMax.point[minMax.point.length - 1];
+        var extractedData = gomori.run();
+
+        var minMax = extractedData.minMax;
+            var value = extractedData.tableData[extractedData.tableData.length - 1]
+                [extractedData.tableData[extractedData.tableData.length - 1].length - 1];
             if (result.direction) {
                 value.mult(-1);
             }
@@ -128,11 +113,8 @@ function Kernel() {
 
             minMax.point = minMax.point.splice(0, transform._before);
             minMax.point.push(value);
-        }
-        extractedData[i].table.appendTo($cont);
-        inf = $('<div>');
-        str = 'Ітерація: ' + extractedData[i].i + '<br/>';
-        str += Simplex.displayMessage(minMax) + '<br/>';
+        var inf = $('<div>');
+        var str = gomori.displayMessage(minMax) + '<br/>';
         inf.html(str);
         inf.appendTo($cont);
     };
@@ -146,22 +128,10 @@ function Kernel() {
         return $('<div>').attr('id', 'output');
     };
 
-    this.withoutTransformation = function(lim, fun, partial) {
-        var Simplex = new SimplexMethod(lim, fun);
-        var extractedData = Simplex.run(partial);
-        if (!extractedData) {
-            return;
-        }
+    this.withoutTransformation = function(lim, fun, ints) {
+        var gomori = new Gomori(lim, fun, ints);
         var $cont = self.getOutputContainer();
         $cont.appendTo($('#container'));
-        var inf;
-        for (var i = 0; i < extractedData.length; i++) {
-            extractedData[i].table.appendTo($cont);
-            inf = $('<div>');
-            var str = 'Ітерація: ' + extractedData[i].i + '<br/>';
-            str += Simplex.displayMessage(extractedData[i].minMax) + '<br/>';
-            inf.html(str);
-            inf.appendTo($cont);
-        }
+        gomori.run();
     }
 }

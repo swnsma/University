@@ -276,9 +276,12 @@ function Inputer() {
             for(i = 0; i < signInputs.length; i++) {
                 extractedS.push(signInputs[i].val());
             }
-            var extractedI = [];
+            var extractedI = [], extractedInt = [];
             for(i = 0; i< inalienability.length; i++) {
-                extractedI.push(inalienability[i].val());
+                if (inalienability[i].val() == 1) {
+                    extractedInt.push(i);
+                }
+                extractedI.push(1);
             }
 
             var extractedF = [];
@@ -286,7 +289,7 @@ function Inputer() {
                 extractedF.push(new Fraction(inputs[i].val(), inputs[++i].val()));
             }
 
-            callback(extractedTable, extractedF, extractedS, extractedI, select.val());
+            callback(extractedTable, extractedF, extractedS, extractedI, select.val(), extractedInt);
 
         });
         button.appendTo($node);

@@ -1,4 +1,4 @@
-TableProcessor = (function()
+DualTableProcessor = (function()
 {
     var instance;
 

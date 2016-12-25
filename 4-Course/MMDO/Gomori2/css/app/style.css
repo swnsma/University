@@ -41,6 +41,13 @@ input {
 }
 .inalienability {
     margin-right: 30px;
-    display: none;
+}
+
+.solution {
+    color: limegreen;
+}
+
+.alarm {
+    color: red;
 }
 
