@@ -12,7 +12,9 @@ class AddToGroup_Test extends \PHPUnit_Extensions_Selenium2TestCase
 
     public function openAddGroupPage()
     {
-        $element = $this->element($this->using('css selector')->value('input[name="new"]'));
+        $element = $this->byXPath('//*[@id="content"]/form[2]/input[1]');
+        $element->click();
+        $element = $this->element($this->using('css selector')->value('input[name="edit"]'));
         $element->click();
     }
 
@@ -28,22 +30,25 @@ class AddToGroup_Test extends \PHPUnit_Extensions_Selenium2TestCase
     public function fillGroupForm($data)
     {
         $element = $this->element($this->using('css selector')->value('input[name="group_name"]'));
+        $element->clear();
         $element->value($data['name']);
         $element = $this->element($this->using('css selector')->value('textarea[name="group_header"]'));
+        $element->clear();
         $element->value($data['header']);
         $element = $this->element($this->using('css selector')->value('textarea[name="group_footer"]'));
+        $element->clear();
         $element->value($data['footer']);
     }
 
     public function submitCreation()
     {
-        $element = $this->element($this->using('css selector')->value('input[name="submit"]'));
+        $element = $this->element($this->using('css selector')->value('input[name="update"]'));
         $element->click();
     }
 
     public function openGroupList()
     {
-        $this->url('http://tests.local/group.php');
+        $this->byXPath('//*[@id="nav"]/ul/li[3]/a')->click();
     }
 
     public function testScenario()

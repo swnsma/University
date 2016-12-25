@@ -2,13 +2,15 @@
 
 require_once '/home/swnsma/projects/tests/vendor/autoload.php';
 
-class AddToGroup_Test extends \PHPUnit_Extensions_Selenium2TestCase
+class AllGroupRemove_Test extends PHPUnit_Extensions_Selenium2TestCase
 {
     protected function setUp()
     {
         $this->setBrowser("firefox");
         $this->setBrowserUrl("http://tests.local/index.php");
     }
+
+    protected $list = array();
 
     public function openAddGroupPage()
     {
@@ -41,21 +43,61 @@ class AddToGroup_Test extends \PHPUnit_Extensions_Selenium2TestCase
         $element->click();
     }
 
+    public function submitDeletion()
+    {
+        $element = $this->element($this->using('css selector')->value('input[name="delete"]'));
+        $element->click();
+    }
+
+    public function goToGroupList()
+    {
+        $this->byXPath('//*[@id="content"]/div/i/a')->click();
+    }
+
     public function openGroupList()
     {
-        $this->url('http://tests.local/group.php');
+        $this->byXPath('//*[@id="nav"]/ul/li[3]/a')->click();
+    }
+
+    public function addGroups()
+    {
+        $this->openAddressList();
+        $iterator = rand(2, 5);
+        while($iterator--) {
+            $this->openGroupList();
+            $this->openAddGroupPage();
+            $groupData = $this->getGroupTestData();
+            $this->list[] = $groupData['name'];
+            $this->fillGroupForm($groupData);
+            $this->submitCreation();
+            $this->openGroupList();
+            $this->assertTrue($this->verify($groupData['name']));
+        }
     }
 
     public function testScenario()
     {
-        $this->openAddressList();
+        $this->addGroups();
         $this->openGroupList();
-        $this->openAddGroupPage();
-        $groupData = $this->getGroupTestData();
-        $this->fillGroupForm($groupData);
-        $this->submitCreation();
-        $this->openGroupList();
-        $this->assertTrue($this->verify($groupData['name']));
+        $this->deleteAllGroups();
+        $this->submitDeletion();
+        $this->goToGroupList();
+        $this->verifyDeletion();
+    }
+
+    public function verifyDeletion()
+    {
+        foreach($this->list as $item) {
+            $this->assertFalse($this->verify($item));
+        }
+    }
+
+    public function deleteAllGroups()
+    {
+        $elements = $this->elements($this->using('css selector')->value('input[type="checkbox"]'));
+        foreach ($elements as $element) {
+            $element->click();
+        }
 
     }
 
